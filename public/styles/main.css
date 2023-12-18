@@ -1,0 +1,55 @@
+body {
+    text-align: center;
+}
+
+.form-submit {
+    outline: none;
+    border: 1px solid rgb(232, 232, 232);
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 36px;
+    width: 30%;
+}
+.form-submit:focus {
+    box-shadow: 0 0 0 0.5px rgb(153, 153, 153);
+}
+
+.card-body > img {
+    float: left;
+    height: 250px;
+    width: 150px;
+    margin-right: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+#search {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+#search-div {
+    background-color: #2e51a2;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+#search-div h1 {
+    font-size: 4rem;
+}
+
+#filter-div {
+    display: flex;
+    flex-direction: column;
+}
+

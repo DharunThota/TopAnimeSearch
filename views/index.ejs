@@ -1,0 +1,119 @@
+<%- include("partials/header.ejs") %>
+
+  <div class="p-5 mb-5 text-center rounded-3" id="search-div">
+    <h1>TopAnime</h1>
+    <div class="align-items-center gap-2 mb-5">
+        <div class="input-group justify-content-center">
+            <form id="search" action="/search" method="POST">
+                <input name="q" type="text" class="form-control rounded" placeholder="Search for Anime" size="50%" required/>
+                <input type="submit" class="btn btn-outline-light" data-mdb-ripple-init value="Submit"></input>
+            </form>
+        </div>
+
+        <div class="container my-5"><h3>  ------------------  OR  -------------------  </h3></div>
+
+        <div class="container text-center" id="filter-div">
+            <form action="/filter" id="form" class="form" method="POST">
+                
+                <div class="row my-3">
+                    <div class="col">
+                        <select name="type" class="form-select">
+                            <option value="" data-display="Select">Type</option>
+                            <option value="tv">TV</option>
+                            <option value="movie">Movie</option>
+                            <option value="ova">OVA</option>
+                            <option value="special">Special</option>
+                            <option value="ona">ONA</option>
+                            <option value="music">Music</option>
+                          </select>
+                    </div>
+                    <div class="col">
+                        <select name="filter" class="form-select">
+                            <option value="">Filter By</option>
+                            <option value="airing">Airing</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="bypopularity">By Popularity</option>
+                            <option value="favorite">Favorite</option>
+                          </select>
+                    </div>
+                    <div class="col">
+                        <select name="rating" class="form-select">
+                            <option value="">Rating</option>
+                            <option value="g">G</option>
+                            <option value="pg">PG</option>
+                            <option value="pg13">PG-13</option>
+                            <option value="r17">R-17</option>
+                            <option value="r">R</option>
+                            <option value="rx">RX</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select name="limit" class="form-select">
+                            <option value="">Limit</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6"><button type="submit" class="form-submit"><strong>GO</strong></button></div>
+                    <div class="col-3"></div>
+                  </div>
+                
+              </form>
+        </div>
+
+    </div>
+  </div>
+
+   <% if(locals.data){ %>
+    <h1>RESULTS</h1>
+    <% for( let i = 0; i < data.length; i+=2) { %>
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="card">
+                    <div class="card-body">
+                      <img src=<%= data[i].images.jpg["image_url"] %> alt="picture" >
+                      <h5 class="card-title"><%= i+1 %>. <%= data[i].title %></h5>
+                      <ul>
+                        <li>Score: <%= data[i].score %></li>
+                        <li>Episodes: <%= data[i].episodes %></li>
+                        <li>Type: <%= data[i].type %></li>
+                        <li>Status: <%= data[i].status %></li>
+                      </ul>
+                      <a href=<%= data[i].url %> class="btn btn-primary" target="_blank">MyAnimeList</a>
+                    </div>
+                  </div>
+                </div>
+                <% if (i + 1 < data.length) { %>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                              <img src=<%= data[i+1].images.jpg["image_url"] %> alt="picture" >
+                              <h5 class="card-title"><%= i+2 %>. <%= data[i+1].title %></h5>
+                              <ul>
+                                <li>Score: <%= data[i+1].score %></li>
+                                <li>Episodes: <%= data[i+1].episodes %></li>
+                                <li>Type: <%= data[i+1].type %></li>
+                                <li>Status: <%= data[i+1].status %></li>
+                              </ul>
+                              <a href=<%= data[i].url %> class="btn btn-primary" target="_blank">MyAnimeList</a>
+                            </div>
+                      </div>
+                <% } %>
+            </div>
+        </div>
+       <% } %>
+    <% } else if (locals.error) { %>
+        <h3>No Results match your search. Please Try Again</h3>
+    <% } else { %>
+        <h3>Try Searching something 👆</h3>
+    <% } %>
+
+<%- include("partials/footer.ejs") %>
